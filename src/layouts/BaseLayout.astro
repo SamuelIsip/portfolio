@@ -1,0 +1,64 @@
+---
+import '@fontsource-variable/schibsted-grotesk/wght.css';
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@/styles/global.css';
+// Preload only the Latin subsets that render above the fold; latin-ext (ș, ț, ă) loads on demand.
+import displayFont from '@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2?url';
+import serifFont from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
+
+import { defaultLocale, localePath, locales, localeTags, type Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const t = useTranslations(locale);
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonical = new URL(localePath(locale), site);
+const ogImage = new URL('/og.png', site);
+---
+
+<!doctype html>
+<html lang={localeTags[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a1120" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => <link rel="alternate" hreflang={localeTags[l]} href={new URL(localePath(l), site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(localePath(defaultLocale), site)} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={localeTags[locale].replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="font-display sr-only z-50 rounded-sm bg-accent-strong px-4 py-2 text-sm text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >
+      {t('a11y.skip')}
+    </a>
+    <slot />
+  </body>
+</html>

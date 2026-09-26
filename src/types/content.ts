@@ -1,0 +1,73 @@
+import type { Locale } from '@/i18n/config';
+
+/** A value written once per language. */
+export type Localized<T = string> = Record<Locale, T>;
+
+/** "YYYY-MM"; `null` as an end date means "present". */
+export type YearMonth = `${number}-${number}`;
+
+export interface Site {
+  name: string;
+  fullName: string;
+  role: Localized;
+  location: string;
+  timeZone: string;
+  email: string;
+  /** Hero sentence: what I build and for whom. */
+  headline: Localized;
+  /** About section, one string per paragraph. */
+  about: Localized<string[]>;
+  availability: Localized;
+  languages: Localized<{ name: string; level: string }[]>;
+  /** Companies I have shipped work for, shown in the hero. */
+  clients: string[];
+  cv: { href: string; locale: Locale };
+  seo: { title: Localized; description: Localized };
+}
+
+export interface SocialLink {
+  label: string;
+  href: string;
+  icon: 'github' | 'linkedin' | 'mail';
+}
+
+export interface SkillGroup {
+  title: Localized;
+  items: string[];
+}
+
+export interface Metric {
+  value: string;
+  label: Localized;
+}
+
+export interface Project {
+  slug: string;
+  title: Localized;
+  client: string;
+  year: string;
+  summary: Localized;
+  /** Case-study beats: what was wrong, what I did. */
+  problem: Localized;
+  work: Localized;
+  metrics?: Metric[];
+  stack: string[];
+  links?: { demo?: string; repo?: string };
+  /** The first featured project gets the full-width layout. */
+  featured?: boolean;
+}
+
+export interface Job {
+  role: Localized;
+  company: string;
+  context?: Localized;
+  start: YearMonth;
+  end: YearMonth | null;
+  highlights: Localized<string[]>;
+}
+
+export interface Education {
+  title: Localized;
+  start: YearMonth;
+  end: YearMonth;
+}

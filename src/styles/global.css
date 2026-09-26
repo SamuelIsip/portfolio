@@ -1,0 +1,86 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    /* Keeps anchored section headings clear of the sticky header. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-night text-ink font-serif text-base antialiased;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-accent-strong text-white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Centered page column; content-box so the gutters sit outside the max width. */
+  .page {
+    @apply mx-auto max-w-(--container-page) px-(--spacing-gutter);
+    box-sizing: content-box;
+  }
+}
+
+@layer utilities {
+  /*
+   * Scroll reveal: elements start visible (no-JS safe). reveal.ts adds
+   * .js-reveal to <html>, then flips .is-visible as each element enters.
+   */
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      transform var(--duration-slow) var(--ease-out);
+  }
+  .js-reveal [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js-reveal [data-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

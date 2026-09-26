@@ -1,0 +1,72 @@
+/*
+ * Design tokens — the single source of the site's look.
+ * Tailwind v4 turns every variable in @theme into a utility
+ * (e.g. --color-accent → bg-accent / text-accent, --font-display → font-display).
+ * Change a value here and it propagates everywhere; never hardcode hex/px in components.
+ */
+@theme {
+  /* Reset Tailwind's default palette so only our tokens exist as utilities. */
+  --color-*: initial;
+
+  /* Palette: night navy from the reference, one blue accent. */
+  --color-night: #0a1120;        /* page background */
+  --color-surface: #101a2c;      /* raised blocks (fact sheet, form) */
+  --color-line: #1f2b40;         /* hairlines and borders */
+  --color-line-strong: #33425c;  /* borders on hover / inputs */
+  --color-ink: #f2f5f9;          /* primary text */
+  --color-muted: #93a0b4;        /* secondary text — 6.6:1 on surface */
+  /* Two tones of the same accent: plain #2F80ED fails AA with white text (3.9:1). */
+  --color-accent: #3a86f0;       /* accent as text on dark — ≥4.8:1 */
+  --color-accent-strong: #1d6fe0;/* accent as fill behind white text — 4.8:1 */
+  --color-danger: #f07a6a;
+  --color-success: #5cc98f;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Type: grotesk for structure and voice, serif for reading. */
+  --font-*: initial;
+  --font-display: 'Schibsted Grotesk Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+
+  /* Scale ≈ 1.25 for text, with deliberate jumps for headings and the hero name. */
+  --text-*: initial;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 1.3;
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+  --text-2xl--line-height: 1.15;
+  --text-3xl: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  --text-3xl--line-height: 1.05;
+  --text-display: clamp(3.25rem, 1rem + 10vw, 8.5rem);
+  --text-display--line-height: 0.92;
+
+  --tracking-display: -0.035em;
+  --tracking-tight: -0.015em;
+  --tracking-wide: 0.04em;
+
+  /* Layout */
+  --container-page: 72rem;      /* 1152px content width */
+  --container-prose: 36rem;     /* ~65 characters of serif body */
+  --spacing-gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --spacing-section: clamp(5rem, 3rem + 8vw, 9rem);
+
+  /* Shape: small radii; depth comes from surface tone, not shadows. */
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 9999px;
+  --shadow-*: initial;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-slow: 700ms;
+}

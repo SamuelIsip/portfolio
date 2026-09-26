@@ -1,0 +1,27 @@
+---
+/*
+ * The whole single page for one locale. Every route (/, /en/, /ro/) renders this,
+ * so sections are added here once and appear in all languages.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { Locale } from '@/i18n/config';
+import { pick } from '@/i18n/ui';
+import { site } from '@/data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<BaseLayout
+  locale={locale}
+  title={pick(site.seo.title, locale)}
+  description={pick(site.seo.description, locale)}
+>
+  <main id="main" class="page py-(--spacing-section)">
+    <h1 class="text-display font-bold tracking-(--tracking-display)">{site.name}</h1>
+    <p class="mt-6 max-w-(--container-prose) text-lg text-muted">{pick(site.headline, locale)}</p>
+  </main>
+</BaseLayout>
