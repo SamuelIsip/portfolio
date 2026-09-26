@@ -38,12 +38,10 @@ const messages = {
     </a>
   </p>
 
-  <!-- Without an endpoint configured the form falls back to the visitor's mail client. -->
   <form
-    action={PUBLIC_CONTACT_ENDPOINT ?? `mailto:${site.email}`}
+    action={PUBLIC_CONTACT_ENDPOINT}
     method="post"
     data-contact-form
-    data-configured={PUBLIC_CONTACT_ENDPOINT ? 'true' : 'false'}
     data-messages={JSON.stringify(messages)}
     class="rounded-md bg-surface p-6 sm:p-8"
   >

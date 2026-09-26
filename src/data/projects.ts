@@ -81,7 +81,7 @@ export const projects: Project[] = [
       ro: 'Cache pentru procesarea plăților virtuale',
     },
     client: 'Redsys',
-    year: '2020–2025', // PLACEHOLDER: narrow down the year
+    year: '2024',
     summary: {
       es: 'La caché de un sistema nuevo que procesa los datos de miles de transacciones bancarias virtuales.',
       en: 'The cache of a new system that processes data from thousands of virtual bank transactions.',
@@ -97,7 +97,7 @@ export const projects: Project[] = [
       en: 'I implemented the cache used when processing the data of those transactions.',
       ro: 'Am implementat cache-ul folosit la procesarea datelor acelor tranzacții.',
     },
-    stack: ['Java', 'Redis'], // PLACEHOLDER: confirm the stack
+    stack: ['Java', 'Spring Batch'],
   },
   {
     slug: 'gateway-go',

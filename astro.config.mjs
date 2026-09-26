@@ -14,8 +14,14 @@ export default defineConfig({
   },
   env: {
     schema: {
-      // Form endpoint (e.g. https://formspree.io/f/xxxx). Public by nature: it ships in the HTML.
-      PUBLIC_CONTACT_ENDPOINT: envField.string({ context: 'client', access: 'public', optional: true, url: true }),
+      // Formspree endpoint. Public by nature (it ships in the HTML), so the real one is the default;
+      // set PUBLIC_CONTACT_ENDPOINT only to point at a different form.
+      PUBLIC_CONTACT_ENDPOINT: envField.string({
+        context: 'client',
+        access: 'public',
+        url: true,
+        default: 'https://formspree.io/f/xzezjbgb',
+      }),
     },
   },
   integrations: [

@@ -36,18 +36,14 @@ To change the look globally (colors, fonts, sizes, spacing), edit `src/styles/to
 ## Contact form
 
 The form posts to [Formspree](https://formspree.io) (free plan: 50 messages/month), so no server is needed.
-
-1. Create a form in Formspree that delivers to your email.
-2. Copy its endpoint (`https://formspree.io/f/…`) into `PUBLIC_CONTACT_ENDPOINT`:
-   locally in `.env` (see `.env.example`), and in Cloudflare as a build variable.
-
-Without the variable the form still validates, and on submit points visitors to your email address.
+The endpoint `https://formspree.io/f/xzezjbgb` is the default in `astro.config.mjs`; nothing to configure.
+To use a different form, set `PUBLIC_CONTACT_ENDPOINT` (in `.env` locally, or as a Cloudflare build variable).
 
 ## Deploy on Cloudflare (free plan)
 
 1. Push this repository to GitHub.
 2. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**, pick the repository.
 3. Build settings: framework preset **Astro**, build command `npm run build`, output directory `dist`.
-4. Add the environment variable `PUBLIC_CONTACT_ENDPOINT` and deploy.
+4. Deploy.
 5. When you buy the domain: **Custom domains → Set up a domain**. If it isn't `samuelisipcv.com`,
    update `site` in `astro.config.mjs` and the sitemap URL in `public/robots.txt`.

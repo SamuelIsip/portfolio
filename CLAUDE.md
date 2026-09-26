@@ -11,8 +11,9 @@ Design reference: `reference/` (structure, rhythm, palette — never copy its br
 - `@astrojs/sitemap` for the sitemap. CSS is inlined (`build.inlineStylesheets: 'always'`).
 - Hosting: **Cloudflare (free plan)**, connected to GitHub, serving `dist/` as a static site. **No adapter,
   no server routes** — keep it that way unless Samuel asks; it was tried and removed on purpose.
-- Contact form posts to **Formspree** via `PUBLIC_CONTACT_ENDPOINT` (typed in `astro.config.mjs` → `env.schema`,
-  read from `astro:env/client`). Validation rules live in `src/lib/contact.ts`.
+- Contact form posts to **Formspree** (`https://formspree.io/f/xzezjbgb`, the default of `PUBLIC_CONTACT_ENDPOINT`
+  in `astro.config.mjs` → `env.schema`, read from `astro:env/client`) with our own fetch script — not
+  `@formspree/ajax`, which would lose the localized messages. Validation rules live in `src/lib/contact.ts`.
 - Motion: CSS + a small IntersectionObserver script. No animation library.
 
 Every new dependency must be justified in the PR/summary. Prefer writing 20 lines over adding a package.

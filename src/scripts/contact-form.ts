@@ -78,11 +78,6 @@ if (form) {
     }
     showErrors({}, contactFields);
 
-    if (form.dataset.configured !== 'true') {
-      setStatus(messages.failed, 'danger');
-      return;
-    }
-
     submit.disabled = true;
     submit.setAttribute('aria-busy', 'true');
     submit.textContent = messages.sending;
