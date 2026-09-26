@@ -1,0 +1,42 @@
+---
+/*
+ * One 404 for every language: the URL can't tell us which one the visitor
+ * expected, so the message is shown in all three.
+ */
+import Landscape from '@/components/ui/Landscape.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/data/site';
+import { localePath, locales } from '@/i18n/config';
+
+const copy = {
+  es: { text: 'Esta página no existe.', link: 'Ir a la portada' },
+  en: { text: 'This page does not exist.', link: 'Go to the home page' },
+  ro: { text: 'Această pagină nu există.', link: 'Mergi la pagina principală' },
+};
+---
+
+<BaseLayout locale="es" title={`404 — ${site.name}`} description={copy.es.text} noindex>
+  <main id="main" class="relative isolate flex min-h-svh flex-col overflow-hidden">
+    <!-- Extra wrapper: .page's auto margins would shrink it to content width as a direct flex child. -->
+    <div class="flex-1"><div class="page pt-16 sm:pt-24">
+      <a href="/" class="font-display text-lg font-bold text-ink">{site.name}</a>
+      <h1 class="mt-16 text-display font-bold tracking-(--tracking-display)">404</h1>
+      <ul class="mt-8 space-y-6">
+        {
+          locales.map((locale) => (
+            <li lang={locale}>
+              <p class="font-display text-xl font-semibold text-ink">{copy[locale].text}</p>
+              <a
+                href={localePath(locale)}
+                class="font-display mt-1 inline-block text-sm text-accent underline underline-offset-4"
+              >
+                {copy[locale].link}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div></div>
+    <Landscape class="mt-16 block h-48 w-full sm:h-64" />
+  </main>
+</BaseLayout>

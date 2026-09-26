@@ -37,11 +37,10 @@ export const site: Site = {
     ],
   },
 
-  // PLACEHOLDER: confirm work mode (remote / hybrid / on-site) and preferred area.
   availability: {
-    es: 'Busco mi próximo puesto. Remoto o híbrido en Madrid.',
-    en: 'Looking for my next role. Remote or hybrid in Madrid.',
-    ro: 'Îmi caut următorul post. Remote sau hibrid în Madrid.',
+    es: 'Busco mi próximo puesto, en remoto.',
+    en: 'Looking for my next role, remote.',
+    ro: 'Îmi caut următorul post, remote.',
   },
 
   languages: {

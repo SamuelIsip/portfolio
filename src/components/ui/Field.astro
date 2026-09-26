@@ -1,0 +1,57 @@
+---
+/*
+ * Labelled form control with hint and error slots. The error paragraph is always
+ * rendered (empty) so contact-form.ts only fills it and toggles aria-invalid.
+ */
+interface Props {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'textarea';
+  autocomplete?: string;
+  hint?: string;
+  minlength?: number;
+  maxlength?: number;
+  class?: string;
+}
+
+const { name, label, type = 'text', autocomplete, hint, minlength, maxlength, class: className } = Astro.props;
+const id = `contact-${name}`;
+const hintId = hint ? `${id}-hint` : undefined;
+const errorId = `${id}-error`;
+const describedBy = [hintId, errorId].filter(Boolean).join(' ');
+
+const control =
+  'font-display block w-full rounded-sm border border-field bg-night px-3.5 py-3 text-base text-ink placeholder:text-muted transition-colors duration-(--duration-fast) hover:border-muted focus:border-accent aria-[invalid=true]:border-danger';
+---
+
+<div class={className}>
+  <label for={id} class="font-display block text-sm font-medium text-ink">{label}</label>
+  {hint && <p id={hintId} class="font-display mt-1 text-xs text-muted">{hint}</p>}
+  {
+    type === 'textarea' ? (
+      <textarea
+        id={id}
+        name={name}
+        required
+        rows="6"
+        minlength={minlength}
+        maxlength={maxlength}
+        aria-describedby={describedBy}
+        class:list={[control, 'mt-2 min-h-36 resize-y']}
+      />
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        required
+        autocomplete={autocomplete}
+        minlength={minlength}
+        maxlength={maxlength}
+        aria-describedby={describedBy}
+        class:list={[control, 'mt-2']}
+      />
+    )
+  }
+  <p id={errorId} data-error-for={name} class="font-display mt-2 text-sm text-danger empty:hidden"></p>
+</div>

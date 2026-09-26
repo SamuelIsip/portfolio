@@ -10,6 +10,10 @@ interface Props {
 }
 const { class: className } = Astro.props;
 
+// The landscape appears more than once per page; prefix its SVG ids so they stay unique.
+const uid = `ls${Math.random().toString(36).slice(2, 8)}`;
+const ref = (name: string) => `${uid}-${name}`;
+
 const W = 1600;
 const H = 560;
 
@@ -35,24 +39,25 @@ const furrows = Array.from({ length: 29 }, (_, i) => -1400 + i * 150);
   focusable="false"
 >
   <defs>
-    <linearGradient id="sky-lift" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="var(--color-night)" stop-opacity="0" />
+    <linearGradient id={ref('sky-lift')} x1="0" y1="0" x2="0" y2="1">
+      <!-- Starts late so short, cropped bands (footer, 404) don't show the gradient's top edge. -->
+      <stop offset="0.72" stop-color="var(--color-night)" stop-opacity="0" />
       <stop offset="1" stop-color="var(--color-sky-low)" />
     </linearGradient>
-    <clipPath id="field">
+    <clipPath id={ref('field')}>
       <path d="M0 506 C 420 494 920 490 1600 500 V560 H0Z" />
     </clipPath>
-    <symbol id="mill" overflow="visible">
+    <symbol id={ref('mill')} overflow="visible">
       <path d="M-9 0 H9 L7 -38 H-7Z" fill="var(--color-mill)" />
       <path d="M-9.5 -37 H9.5 L0 -50Z" fill="var(--color-land-far)" />
     </symbol>
-    <g id="sail" fill="none" stroke="var(--color-mill)" stroke-width="1.2">
+    <g id={ref('sail')} fill="none" stroke="var(--color-mill)" stroke-width="1.2">
       <path d="M0 0 V-36" />
       <rect x="0.8" y="-36" width="5" height="25" />
     </g>
   </defs>
 
-  <rect x="0" y="0" width={W} height="440" fill="url(#sky-lift)" />
+  <rect x="0" y="0" width={W} height="440" fill={`url(#${ref('sky-lift')})`} />
 
   <path
     fill="var(--color-land-far)"
@@ -67,10 +72,10 @@ const furrows = Array.from({ length: 29 }, (_, i) => -1400 + i * 150);
   {
     mills.map(([x, angle, s]) => (
       <g transform={`translate(${x} 411) scale(${s})`}>
-        <use href="#mill" />
+        <use href={`#${ref('mill')}`} />
         <g transform="translate(0 -41)">
           {[0, 90, 180, 270].map((a) => (
-            <use href="#sail" transform={`rotate(${angle + a})`} />
+            <use href={`#${ref('sail')}`} transform={`rotate(${angle + a})`} />
           ))}
         </g>
       </g>
@@ -78,7 +83,7 @@ const furrows = Array.from({ length: 29 }, (_, i) => -1400 + i * 150);
   }
 
   <path fill="var(--color-land-near)" d="M0 506 C 420 494 920 490 1600 500 V560 H0Z" />
-  <g clip-path="url(#field)" stroke="var(--color-line)" stroke-width="1">
+  <g clip-path={`url(#${ref('field')})`} stroke="var(--color-line)" stroke-width="1">
     {furrows.map((x) => <line x1={vp.x} y1={vp.y} x2={x} y2={H} />)}
   </g>
 </svg>

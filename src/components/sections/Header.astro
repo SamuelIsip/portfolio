@@ -24,7 +24,7 @@ const linkClass =
   class="sticky top-0 z-40 border-b border-transparent bg-night transition-colors duration-(--duration-fast) data-[scrolled]:border-line"
 >
   <div class="page flex h-16 items-center justify-between gap-6 lg:h-20">
-    <a href={localePath(locale)} class="group flex flex-col leading-none" aria-label={`${site.name}, ${t('nav.home')}`}>
+    <a href={localePath(locale)} class="group flex flex-col leading-none">
       <span class="font-display text-lg font-bold tracking-(--tracking-tight) text-ink">{site.name}</span>
       <span class="font-display mt-1 text-xs text-muted">{pick(site.role, locale)}</span>
     </a>

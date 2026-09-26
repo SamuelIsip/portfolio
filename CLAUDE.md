@@ -8,8 +8,11 @@ Design reference: `reference/` (structure, rhythm, palette — never copy its br
 - **Astro 7** + TypeScript strict, static output. Zero client JS unless a feature needs it.
 - **Tailwind CSS v4** via `@tailwindcss/vite`. Tokens live in `@theme` (CSS variables), not in a JS config.
 - Fonts via **fontsource** (self-hosted, variable): Schibsted Grotesk + Source Serif 4.
-- `@astrojs/sitemap` for the sitemap. Hosting: **Cloudflare**. The contact form will be a Cloudflare
-  on-demand endpoint (`prerender = false`) that sends through the Resend HTTP API — see `.env.example`.
+- `@astrojs/sitemap` for the sitemap. CSS is inlined (`build.inlineStylesheets: 'always'`).
+- Hosting: **Cloudflare (free plan)**, connected to GitHub, serving `dist/` as a static site. **No adapter,
+  no server routes** — keep it that way unless Samuel asks; it was tried and removed on purpose.
+- Contact form posts to **Formspree** via `PUBLIC_CONTACT_ENDPOINT` (typed in `astro.config.mjs` → `env.schema`,
+  read from `astro:env/client`). Validation rules live in `src/lib/contact.ts`.
 - Motion: CSS + a small IntersectionObserver script. No animation library.
 
 Every new dependency must be justified in the PR/summary. Prefer writing 20 lines over adding a package.
@@ -37,6 +40,8 @@ npm run preview   # serve dist/
 | One component per section | `src/components/sections/` |
 | Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated list), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Landscape` |
 | Formatting helpers (dates, Localized-or-string) | `src/lib/format.ts` |
+| Contact form rules (limits, validation, honeypot) | `src/lib/contact.ts` + `src/scripts/contact-form.ts` |
+| SEO: meta, Open Graph, hreflang, JSON-LD Person | `src/layouts/BaseLayout.astro`; `public/og.png`, `public/robots.txt` |
 | Client scripts (menu, reveal, form) | `src/scripts/` |
 | Images processed by astro:assets | `src/assets/` |
 | Static files served as-is (favicon, CV, OG image) | `public/` |

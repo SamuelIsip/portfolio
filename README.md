@@ -1,6 +1,7 @@
 # Samuel Isip — portfolio
 
 Personal single-page site in Spanish, English and Romanian. Built with Astro, TypeScript and Tailwind CSS.
+Fully static: the output in `dist/` can be served by any static host.
 
 ## Run it
 
@@ -26,6 +27,7 @@ You don't need to touch components to change what the site says:
 | GitHub / LinkedIn / email links | `src/data/social.ts` |
 | Buttons, menu labels, form messages | `src/i18n/ui.ts` |
 | CV PDF | `public/cv/` (and the path in `site.ts`) |
+| Link preview image | `public/og.png` (1200×630) |
 
 Every text has an `es`, `en` and `ro` version. Values marked `// PLACEHOLDER:` still need confirming.
 
@@ -33,4 +35,19 @@ To change the look globally (colors, fonts, sizes, spacing), edit `src/styles/to
 
 ## Contact form
 
-Copy `.env.example` to `.env` and fill it in. In production, set the same variables as Cloudflare secrets.
+The form posts to [Formspree](https://formspree.io) (free plan: 50 messages/month), so no server is needed.
+
+1. Create a form in Formspree that delivers to your email.
+2. Copy its endpoint (`https://formspree.io/f/…`) into `PUBLIC_CONTACT_ENDPOINT`:
+   locally in `.env` (see `.env.example`), and in Cloudflare as a build variable.
+
+Without the variable the form still validates, and on submit points visitors to your email address.
+
+## Deploy on Cloudflare (free plan)
+
+1. Push this repository to GitHub.
+2. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**, pick the repository.
+3. Build settings: framework preset **Astro**, build command `npm run build`, output directory `dist`.
+4. Add the environment variable `PUBLIC_CONTACT_ENDPOINT` and deploy.
+5. When you buy the domain: **Custom domains → Set up a domain**. If it isn't `samuelisipcv.com`,
+   update `site` in `astro.config.mjs` and the sitemap URL in `public/robots.txt`.

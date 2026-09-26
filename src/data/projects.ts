@@ -76,26 +76,26 @@ export const projects: Project[] = [
   {
     slug: 'cache-redsys',
     title: {
-      es: 'Capa de caché para transacciones bancarias',
-      en: 'Caching layer for bank transactions',
-      ro: 'Strat de cache pentru tranzacții bancare',
+      es: 'Caché para el procesado de pagos virtuales',
+      en: 'Caching for virtual payment processing',
+      ro: 'Cache pentru procesarea plăților virtuale',
     },
     client: 'Redsys',
     year: '2020–2025', // PLACEHOLDER: narrow down the year
     summary: {
-      es: 'La capa de caché de un sistema nuevo que procesa miles de transacciones bancarias.',
-      en: 'The caching layer of a new system that processes thousands of bank transactions.',
-      ro: 'Stratul de cache al unui sistem nou care procesează mii de tranzacții bancare.',
+      es: 'La caché de un sistema nuevo que procesa los datos de miles de transacciones bancarias virtuales.',
+      en: 'The cache of a new system that processes data from thousands of virtual bank transactions.',
+      ro: 'Cache-ul unui sistem nou care procesează datele a mii de tranzacții bancare virtuale.',
     },
     problem: {
-      es: 'Un sistema de pagos nuevo tenía que responder rápido bajo volumen alto sin consultar el origen en cada transacción.',
-      en: 'A new payments system had to respond quickly under high volume without hitting the source on every transaction.',
-      ro: 'Un sistem nou de plăți trebuia să răspundă rapid la volum mare fără să interogheze sursa la fiecare tranzacție.',
+      es: 'Redsys es la plataforma de pagos virtuales que se usa en toda España. Un sistema nuevo tenía que procesar los datos de miles de transacciones sin ir al origen en cada una.',
+      en: 'Redsys is the virtual payments platform used across Spain. A new system had to process data from thousands of transactions without going back to the source for each one.',
+      ro: 'Redsys este platforma de plăți virtuale folosită în toată Spania. Un sistem nou trebuia să proceseze datele a mii de tranzacții fără să revină la sursă pentru fiecare.',
     },
     work: {
-      es: 'Implementé la capa de caché del sistema.',
-      en: 'I implemented the system’s caching layer.',
-      ro: 'Am implementat stratul de cache al sistemului.',
+      es: 'Implementé la caché que usa el procesado de datos de esas transacciones.',
+      en: 'I implemented the cache used when processing the data of those transactions.',
+      ro: 'Am implementat cache-ul folosit la procesarea datelor acelor tranzacții.',
     },
     stack: ['Java', 'Redis'], // PLACEHOLDER: confirm the stack
   },
@@ -109,21 +109,20 @@ export const projects: Project[] = [
     client: 'Atresmedia',
     year: '2025–',
     summary: {
-      es: 'Mejoras en el gateway por el que pasan los microservicios de la plataforma.',
-      en: 'Improvements to the gateway that the platform’s microservices go through.',
-      ro: 'Îmbunătățiri ale gateway-ului prin care trec microserviciile platformei.',
+      es: 'Corrección de errores y mejoras en el login y la caché del gateway por el que pasan los microservicios.',
+      en: 'Bug fixes and improvements to the login and caching of the gateway the microservices go through.',
+      ro: 'Corectarea erorilor și îmbunătățirea autentificării și a cache-ului în gateway-ul prin care trec microserviciile.',
     },
-    // PLACEHOLDER: describe what you changed in the gateway and its effect.
     problem: {
-      es: 'Todos los microservicios dependen del gateway: cualquier fallo o lentitud se nota en toda la plataforma.',
-      en: 'Every microservice depends on the gateway: any failure or slowdown is felt across the platform.',
-      ro: 'Toate microserviciile depind de gateway: orice eroare sau încetinire se simte în toată platforma.',
+      es: 'Todos los microservicios dependen del gateway: cualquier fallo en el login o lentitud se nota en toda la plataforma.',
+      en: 'Every microservice depends on the gateway: any login failure or slowdown is felt across the platform.',
+      ro: 'Toate microserviciile depind de gateway: orice eroare la autentificare sau încetinire se simte în toată platforma.',
     },
     work: {
-      es: 'Mejoré el gateway en Go que comparten los microservicios.',
-      en: 'I improved the Go gateway shared by the microservices.',
-      ro: 'Am îmbunătățit gateway-ul în Go folosit de microservicii.',
+      es: 'Solucioné errores del gateway y mejoré el login y la caché con Redis.',
+      en: 'I fixed bugs in the gateway and improved its login flow and Redis caching.',
+      ro: 'Am rezolvat erori ale gateway-ului și am îmbunătățit autentificarea și cache-ul cu Redis.',
     },
-    stack: ['Go', 'GKE', 'Docker'],
+    stack: ['Go', 'Redis', 'GKE'],
   },
 ];

@@ -12,7 +12,8 @@
   --color-night: #0a1120;        /* page background */
   --color-surface: #101a2c;      /* raised blocks (fact sheet, form) */
   --color-line: #1f2b40;         /* hairlines and borders */
-  --color-line-strong: #33425c;  /* borders on hover / inputs */
+  --color-line-strong: #33425c;  /* decorative separators, hover borders */
+  --color-field: #5b6a84;        /* form control borders — ≥3:1 on surface (WCAG 1.4.11) */
   --color-ink: #f2f5f9;          /* primary text */
   --color-muted: #93a0b4;        /* secondary text — 6.6:1 on surface */
   /* Two tones of the same accent: plain #2F80ED fails AA with white text (3.9:1). */

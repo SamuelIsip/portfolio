@@ -1,0 +1,90 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Field from '@/components/ui/Field.astro';
+import Section from '@/components/ui/Section.astro';
+import { site } from '@/data/site';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+import { contactLimits, honeypotField } from '@/lib/contact';
+import { PUBLIC_CONTACT_ENDPOINT } from 'astro:env/client';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Everything contact-form.ts needs to speak the visitor's language.
+const messages = {
+  required: t('contact.error.required'),
+  invalid: t('contact.error.invalid'),
+  tooShort: t('contact.error.tooShort'),
+  tooLong: t('contact.error.tooLong'),
+  sending: t('contact.sending'),
+  sent: t('contact.sent'),
+  failed: t('contact.failed').replace('{email}', site.email),
+};
+---
+
+<Section id="contact" title={t('contact.title')} intro={t('contact.intro')}>
+  <p slot="aside" class="font-display mt-8 text-sm text-muted">
+    {t('contact.direct')}
+    <a
+      href={`mailto:${site.email}`}
+      class="mt-1 block text-base font-medium text-ink underline decoration-line-strong underline-offset-4 transition-colors duration-(--duration-fast) hover:text-accent hover:decoration-accent"
+    >
+      {site.email}
+    </a>
+  </p>
+
+  <!-- Without an endpoint configured the form falls back to the visitor's mail client. -->
+  <form
+    action={PUBLIC_CONTACT_ENDPOINT ?? `mailto:${site.email}`}
+    method="post"
+    data-contact-form
+    data-configured={PUBLIC_CONTACT_ENDPOINT ? 'true' : 'false'}
+    data-messages={JSON.stringify(messages)}
+    class="rounded-md bg-surface p-6 sm:p-8"
+  >
+    <!-- The email goes to Samuel, so its subject is always in Spanish; `idioma` tells the visitor's language. -->
+    <input type="hidden" name="_subject" value="Portfolio: nuevo mensaje de contacto" />
+    <input type="hidden" name="idioma" value={locale} />
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      <Field
+        name="name"
+        label={t('contact.name')}
+        autocomplete="name"
+        minlength={contactLimits.name.min}
+        maxlength={contactLimits.name.max}
+      />
+      <Field name="email" type="email" label={t('contact.email')} autocomplete="email" maxlength={contactLimits.email.max} />
+      <Field
+        name="message"
+        type="textarea"
+        label={t('contact.message')}
+        hint={t('contact.messageHint')}
+        minlength={contactLimits.message.min}
+        maxlength={contactLimits.message.max}
+        class="sm:col-span-2"
+      />
+    </div>
+
+    <!-- Honeypot: hidden from people and assistive tech, tempting for bots. -->
+    <div class="absolute -left-[9999px]" aria-hidden="true">
+      <label for={`contact-${honeypotField}`}>Website</label>
+      <input id={`contact-${honeypotField}`} type="text" name={honeypotField} tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+      <Button type="submit" data-submit data-label={t('contact.submit')}>{t('contact.submit')}</Button>
+      <!-- Live region stays rendered (never display:none) so screen readers announce updates. -->
+      <p data-status role="status" class="font-display text-sm text-muted"></p>
+    </div>
+  </form>
+</Section>
+
+<script>
+  import '@/scripts/contact-form';
+</script>

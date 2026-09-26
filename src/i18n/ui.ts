@@ -27,7 +27,6 @@ export const ui = {
   'nav.open': { es: 'Abrir menú', en: 'Open menu', ro: 'Deschide meniul' },
   'nav.close': { es: 'Cerrar menú', en: 'Close menu', ro: 'Închide meniul' },
   'nav.menu': { es: 'Menú', en: 'Menu', ro: 'Meniu' },
-  'nav.home': { es: 'Inicio', en: 'Home', ro: 'Acasă' },
 
   'hero.cta': { es: 'Ver proyectos', en: 'See my work', ro: 'Vezi proiectele' },
   'hero.cv': { es: 'Descargar CV (PDF)', en: 'Download CV (PDF)', ro: 'Descarcă CV-ul (PDF)' },
@@ -77,6 +76,50 @@ export const ui = {
   'experience.title': { es: 'Experiencia', en: 'Experience', ro: 'Experiență' },
   'experience.present': { es: 'actualidad', en: 'present', ro: 'prezent' },
   'experience.education': { es: 'Formación', en: 'Education', ro: 'Educație' },
+
+  'contact.title': { es: 'Hablemos', en: 'Let’s talk', ro: 'Hai să vorbim' },
+  'contact.intro': {
+    es: 'Si tienes un puesto o un proyecto en el que encaje, cuéntamelo. Te respondo por email.',
+    en: 'If you have a role or a project where I would fit, tell me about it. I will reply by email.',
+    ro: 'Dacă ai un post sau un proiect în care m-aș potrivi, povestește-mi. Îți răspund pe email.',
+  },
+  'contact.direct': { es: 'O escríbeme directamente a', en: 'Or write to me directly at', ro: 'Sau scrie-mi direct la' },
+  'contact.name': { es: 'Nombre', en: 'Name', ro: 'Nume' },
+  'contact.email': { es: 'Email', en: 'Email', ro: 'Email' },
+  'contact.message': { es: 'Mensaje', en: 'Message', ro: 'Mesaj' },
+  'contact.messageHint': {
+    es: 'El puesto o el proyecto, y cómo puedo ayudar.',
+    en: 'The role or the project, and how I can help.',
+    ro: 'Postul sau proiectul și cum te pot ajuta.',
+  },
+  'contact.submit': { es: 'Enviar mensaje', en: 'Send message', ro: 'Trimite mesajul' },
+  'contact.sending': { es: 'Enviando…', en: 'Sending…', ro: 'Se trimite…' },
+  'contact.sent': {
+    es: 'Mensaje enviado. Te responderé a la dirección que has indicado.',
+    en: 'Message sent. I will reply to the address you gave.',
+    ro: 'Mesaj trimis. Îți voi răspunde la adresa indicată.',
+  },
+  'contact.failed': {
+    es: 'No se ha podido enviar el mensaje. Vuelve a intentarlo o escríbeme a {email}.',
+    en: 'The message could not be sent. Try again or email me at {email}.',
+    ro: 'Mesajul nu a putut fi trimis. Încearcă din nou sau scrie-mi la {email}.',
+  },
+  'contact.error.required': { es: 'Rellena este campo.', en: 'Fill in this field.', ro: 'Completează acest câmp.' },
+  'contact.error.invalid': {
+    es: 'Escribe un email con el formato nombre@dominio.com.',
+    en: 'Enter an email like name@domain.com.',
+    ro: 'Scrie un email de forma nume@domeniu.com.',
+  },
+  'contact.error.tooShort': {
+    es: 'Escribe al menos {min} caracteres.',
+    en: 'Write at least {min} characters.',
+    ro: 'Scrie cel puțin {min} caractere.',
+  },
+  'contact.error.tooLong': {
+    es: 'Acorta el texto a {max} caracteres como máximo.',
+    en: 'Shorten this to {max} characters or fewer.',
+    ro: 'Scurtează textul la cel mult {max} caractere.',
+  },
 
   'footer.social': { es: 'Otros perfiles', en: 'Elsewhere', ro: 'Alte profiluri' },
   'footer.top': { es: 'Volver arriba', en: 'Back to top', ro: 'Înapoi sus' },
