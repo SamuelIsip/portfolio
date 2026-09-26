@@ -26,7 +26,7 @@ You don't need to touch components to change what the site says:
 | Stack | `src/data/skills.ts` |
 | GitHub / LinkedIn / email links | `src/data/social.ts` |
 | Buttons, menu labels, form messages | `src/i18n/ui.ts` |
-| CV PDF | `public/cv/` (and the path in `site.ts`) |
+| CV PDFs (one per language) | `public/cv/` (and the paths in `site.ts` → `cv`) |
 | Link preview image | `public/og.png` (1200×630) |
 
 Every text has an `es`, `en` and `ro` version. Values marked `// PLACEHOLDER:` still need confirming.

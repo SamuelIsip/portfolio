@@ -30,12 +30,6 @@ export const ui = {
 
   'hero.cta': { es: 'Ver proyectos', en: 'See my work', ro: 'Vezi proiectele' },
   'hero.cv': { es: 'Descargar CV (PDF)', en: 'Download CV (PDF)', ro: 'Descarcă CV-ul (PDF)' },
-  /** Shown instead of hero.cv when the CV isn't available in the visitor's language. */
-  'hero.cvOtherLang': {
-    es: 'Descargar CV (PDF)',
-    en: 'Download CV (PDF, in Spanish)',
-    ro: 'Descarcă CV-ul (PDF, în spaniolă)',
-  },
   'hero.clients': {
     es: 'He desarrollado software para',
     en: 'I have built software for',
@@ -57,9 +51,9 @@ export const ui = {
 
   'skills.title': { es: 'Con qué trabajo', en: 'What I work with', ro: 'Cu ce lucrez' },
   'skills.intro': {
-    es: 'Lo que uso en producción, no todo lo que he probado alguna vez.',
-    en: 'What I use in production, not everything I have ever tried.',
-    ro: 'Ce folosesc în producție, nu tot ce am încercat vreodată.',
+    es: 'Lo que uso en producción.',
+    en: 'What I use in production.',
+    ro: 'Ce folosesc în producție.',
   },
 
   'projects.title': { es: 'Proyectos', en: 'Selected work', ro: 'Proiecte' },

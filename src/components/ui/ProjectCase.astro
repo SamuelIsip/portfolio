@@ -35,7 +35,6 @@ const headingId = `project-${project.slug}`;
     <p class="font-display flex items-baseline gap-3 text-sm">
       <span class="text-muted tabular-nums" aria-hidden="true">{number}</span>
       <span class="font-medium text-ink">{project.client}</span>
-      <span class="text-muted">{project.year}</span>
     </p>
     <h3 id={headingId} class:list={['mt-3 font-bold', featured ? 'text-2xl' : 'text-xl']}>
       {pick(project.title, locale)}
