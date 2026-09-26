@@ -72,6 +72,11 @@ Routes: `/` (es), `/en/`, `/ro/`. `src/pages/index.astro` and `src/pages/[lang]/
 - **Shape**: radii 4–8px, 1px hairlines in `line`, no drop shadows — depth comes from `surface` tone.
 - **Motion**: one orchestrated hero entrance + discreet scroll reveals (`data-reveal`), hovers that
   answer the user. Always respect `prefers-reduced-motion`.
+- **Hero**: the name is the typographic moment; `src/components/ui/Landscape.astro` draws La Mancha at
+  night (Sierra de Altomira, windmills, ploughed field) in SVG using the `land-*`/`mill` tokens.
+  `src/assets/portrait.png` is the cut-out of `reference/portada/` — background removed, graded cooler,
+  and **mirrored** so the cropped shoulder sits against the right edge of the viewport. Keep it anchored
+  there (md+) with the bottom fade mask.
 - **Projects** are client work under NDA: no screenshots; they are presented as short case studies
   with metrics.
 - Numbering (01, 02…) only where content is a real sequence (timeline, project index).

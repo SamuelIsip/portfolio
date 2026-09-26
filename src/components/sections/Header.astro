@@ -1,0 +1,113 @@
+---
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
+import { navigation } from '@/data/navigation';
+import { site } from '@/data/site';
+import { localePath, type Locale } from '@/i18n/config';
+import { pick, useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Active state is driven by aria-current (set in nav.ts), so style and semantics stay in sync.
+const linkClass =
+  'font-display relative block py-2 text-sm font-medium text-muted transition-colors duration-(--duration-fast) hover:text-ink aria-[current]:text-ink';
+---
+
+<header
+  data-header
+  class="sticky top-0 z-40 border-b border-transparent bg-night transition-colors duration-(--duration-fast) data-[scrolled]:border-line"
+>
+  <div class="page flex h-16 items-center justify-between gap-6 lg:h-20">
+    <a href={localePath(locale)} class="group flex flex-col leading-none" aria-label={`${site.name}, ${t('nav.home')}`}>
+      <span class="font-display text-lg font-bold tracking-(--tracking-tight) text-ink">{site.name}</span>
+      <span class="font-display mt-1 text-xs text-muted">{pick(site.role, locale)}</span>
+    </a>
+
+    <nav aria-label={t('nav.label')} class="hidden lg:block">
+      <ul class="flex items-center gap-8">
+        {
+          navigation.map((item) => (
+            <li>
+              <a href={`#${item.id}`} data-nav-link class:list={[linkClass, 'nav-underline']}>
+                {t(item.label)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="hidden items-center gap-5 lg:flex">
+      <LanguageSwitcher locale={locale} />
+      <Button href="#contact" class="py-2.5">{t('nav.cta')}</Button>
+    </div>
+
+    <button
+      type="button"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label={t('nav.open')}
+      data-label-open={t('nav.open')}
+      data-label-close={t('nav.close')}
+      class="group font-display -mr-2 flex items-center gap-2 rounded-sm px-2 py-2 text-sm font-medium text-ink lg:hidden"
+    >
+      <span aria-hidden="true">{t('nav.menu')}</span>
+      <Icon name="menu" class="size-5 group-aria-expanded:hidden" />
+      <Icon name="close" class="hidden size-5 group-aria-expanded:block" />
+    </button>
+  </div>
+
+  <div id="mobile-menu" hidden class="border-t border-line bg-night lg:hidden">
+    <nav aria-label={t('nav.label')} class="page py-6">
+      <ul class="flex flex-col">
+        {
+          navigation.map((item) => (
+            <li class="border-b border-line">
+              <a
+                href={`#${item.id}`}
+                data-nav-link
+                class="font-display block py-4 text-xl font-semibold text-ink aria-[current]:text-accent"
+              >
+                {t(item.label)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-6 flex items-center justify-between gap-4">
+        <LanguageSwitcher locale={locale} class="-ml-2" />
+        <Button href="#contact">{t('nav.cta')}</Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import '@/scripts/nav';
+</script>
+
+<style>
+  /* Accent underline that grows in for the active section (reference: nav underline). */
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .nav-underline[aria-current]::after {
+    transform: scaleX(1);
+  }
+</style>

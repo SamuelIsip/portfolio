@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+/*
+ * primary: the one filled action per view.
+ * quiet: a text link with a visible underline, for secondary actions.
+ */
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: 'primary' | 'quiet';
+}
+
+const { href, variant = 'primary', class: className, ...rest } = Astro.props;
+
+const variants = {
+  primary:
+    'rounded-sm bg-accent-strong px-5 py-3 text-white hover:bg-accent-deep active:bg-accent-deep',
+  quiet:
+    'py-3 text-ink underline decoration-line-strong decoration-1 underline-offset-[0.35em] hover:text-accent hover:decoration-accent',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    'font-display inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-(--duration-fast)',
+    variants[variant],
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</a>

@@ -18,6 +18,14 @@
   /* Two tones of the same accent: plain #2F80ED fails AA with white text (3.9:1). */
   --color-accent: #3a86f0;       /* accent as text on dark — ≥4.8:1 */
   --color-accent-strong: #1d6fe0;/* accent as fill behind white text — 4.8:1 */
+  --color-accent-deep: #185cc0;  /* hover/pressed state of accent-strong fills */
+
+  /* Hero landscape (La Mancha at night): layers step from horizon glow to foreground. */
+  --color-sky-low: #111c30;      /* faint lift of the sky at the horizon */
+  --color-land-far: #16233a;     /* Sierra de Altomira */
+  --color-land-mid: #0f192b;     /* ridge with windmills */
+  --color-land-near: #0b1322;    /* ploughed field */
+  --color-mill: #2a3a55;         /* whitewashed mill towers catching moonlight */
   --color-danger: #f07a6a;
   --color-success: #5cc98f;
   --color-white: #ffffff;
