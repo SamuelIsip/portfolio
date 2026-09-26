@@ -21,3 +21,6 @@ if (targets.length > 0 && !reduceMotion && 'IntersectionObserver' in window) {
 
   targets.forEach((target) => observer.observe(target));
 }
+
+// Module scope: keeps top-level names from clashing with the other scripts.
+export {};

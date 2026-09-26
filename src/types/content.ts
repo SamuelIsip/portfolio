@@ -10,6 +10,8 @@ export interface Site {
   name: string;
   fullName: string;
   role: Localized;
+  /** Extra phrases the hero types after `role`, in order. */
+  roleRotation: Localized<string[]>;
   location: string;
   timeZone: string;
   email: string;
@@ -34,9 +36,15 @@ export interface SocialLink {
   icon: 'github' | 'linkedin' | 'mail';
 }
 
+export interface StackItem {
+  name: string;
+  /** Simple Icons slug, shown as a small muted logo before the name. */
+  icon?: string;
+}
+
 export interface SkillGroup {
   title: Localized;
-  items: string[];
+  items: StackItem[];
 }
 
 export interface Metric {

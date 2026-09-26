@@ -8,6 +8,11 @@ export const site: Site = {
     en: 'Full stack developer',
     ro: 'Dezvoltator full stack',
   },
+  roleRotation: {
+    es: ['Backend en Java y Spring', 'Frontend en React', 'Microservicios en Go', 'DevOps con Docker y GKE'],
+    en: ['Backend in Java and Spring', 'Frontend in React', 'Microservices in Go', 'DevOps with Docker and GKE'],
+    ro: ['Backend în Java și Spring', 'Frontend în React', 'Microservicii în Go', 'DevOps cu Docker și GKE'],
+  },
   location: 'Tarancón, Cuenca',
   timeZone: 'Europe/Madrid',
   email: 'samuel.isip26@gmail.com',

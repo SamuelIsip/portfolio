@@ -1,19 +1,40 @@
 ---
-/* Inline list separated by slashes ("React / Spring Boot"), as in the reference. Typography comes from `class`. */
+/*
+ * Inline list separated by slashes ("React / Spring Boot"), as in the reference.
+ * Items may carry a brand icon, drawn small and muted so it doesn't compete with
+ * the single accent colour. Typography comes from `class`.
+ */
+import { brandIcon } from '@/lib/brand-icons';
+import type { StackItem } from '@/types/content';
+
 interface Props {
-  items: string[];
+  items: (string | StackItem)[];
   class?: string;
 }
 
 const { items, class: className } = Astro.props;
+const entries = items.map((item) => {
+  const { name, icon } = typeof item === 'string' ? { name: item, icon: undefined } : item;
+  return { name, path: icon ? brandIcon(icon).path : undefined };
+});
 ---
 
 <ul class:list={['font-display flex flex-wrap', className]}>
   {
-    items.map((item, i) => (
-      <li>
-        {item}
-        {i < items.length - 1 && (
+    entries.map(({ name, path }, i) => (
+      <li class="inline-flex items-center">
+        {path && (
+          <svg
+            viewBox="0 0 24 24"
+            class="mr-[0.4em] size-[0.72em] shrink-0 fill-muted"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d={path} />
+          </svg>
+        )}
+        {name}
+        {i < entries.length - 1 && (
           <span class="mx-[0.45em] font-normal text-line-strong" aria-hidden="true">
             /
           </span>

@@ -5,7 +5,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher.astro';
 import { navigation } from '@/data/navigation';
 import { site } from '@/data/site';
 import { localePath, type Locale } from '@/i18n/config';
-import { pick, useTranslations } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/ui';
 
 interface Props {
   locale: Locale;
@@ -13,6 +13,10 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const monogram = site.name
+  .split(' ')
+  .map((word) => word[0])
+  .join('');
 
 // Active state is driven by aria-current (set in nav.ts), so style and semantics stay in sync.
 const linkClass =
@@ -24,9 +28,10 @@ const linkClass =
   class="sticky top-0 z-40 border-b border-transparent bg-night transition-colors duration-(--duration-fast) data-[scrolled]:border-line"
 >
   <div class="page flex h-16 items-center justify-between gap-6 lg:h-20">
-    <a href={localePath(locale)} class="group flex flex-col leading-none">
-      <span class="font-display text-lg font-bold tracking-(--tracking-tight) text-ink">{site.name}</span>
-      <span class="font-display mt-1 text-xs text-muted">{pick(site.role, locale)}</span>
+    <!-- Monogram, same mark as the favicon; the full name follows right below in the hero. -->
+    <a href={localePath(locale)} class="font-display relative -my-2 py-2 text-2xl leading-none font-bold tracking-(--tracking-tight) text-ink">
+      {monogram}<span class="sr-only"> {site.name}</span>
+      <span class="absolute inset-x-0 bottom-0.5 h-0.5 bg-accent" aria-hidden="true"></span>
     </a>
 
     <nav aria-label={t('nav.label')} class="hidden lg:block">
