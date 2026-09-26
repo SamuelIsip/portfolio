@@ -63,8 +63,11 @@ export const site: Site = {
 
   clients: ['Atresmedia', 'Redsys', 'Aena'],
 
-  // Only a Spanish CV exists for now; the link says so in other languages.
-  cv: { href: '/cv/CV_Samuel_Isip_es.pdf', locale: 'es' },
+  cv: {
+    es: '/cv/CV_Samuel_Isip_es.pdf',
+    en: '/cv/CV_Samuel_Isip_en.pdf',
+    ro: '/cv/CV_Samuel_Isip_ro.pdf',
+  },
 
   seo: {
     title: {

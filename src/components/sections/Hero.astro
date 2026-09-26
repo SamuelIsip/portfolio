@@ -52,9 +52,9 @@ const nameLines = [firstName, rest.join(' ')];
 
       <div data-enter style="--i: 4" class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2">
         <Button href="#projects">{t('hero.cta')}</Button>
-        <Button href={site.cv.href} variant="quiet" type="application/pdf">
+        <Button href={pick(site.cv, locale)} variant="quiet" type="application/pdf" download>
           <Icon name="download" class="size-4" />
-          {t(site.cv.locale === locale ? 'hero.cv' : 'hero.cvOtherLang')}
+          {t('hero.cv')}
         </Button>
       </div>
     </div>

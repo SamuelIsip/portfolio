@@ -15,7 +15,6 @@ export const projects: Project[] = [
       ro: 'Aplicație de salarizare și date ale angajaților',
     },
     client: 'Atresmedia',
-    year: '2025–',
     summary: {
       es: 'Una aplicación crítica que usan cada día cientos de personas, construida desde cero y desplegada con el flujo DevOps completo.',
       en: 'A critical application used every day by hundreds of people, built from scratch and shipped through the full DevOps pipeline.',
@@ -51,7 +50,6 @@ export const projects: Project[] = [
       ro: 'Cinci aplicații interne, mai stabile și mai rapide',
     },
     client: 'Atresmedia',
-    year: '2020–2025',
     summary: {
       es: 'Mantenimiento y evolución de 5 aplicaciones web con workflows complejos.',
       en: 'Maintaining and evolving 5 web applications with complex workflows.',
@@ -81,7 +79,6 @@ export const projects: Project[] = [
       ro: 'Cache pentru procesarea plăților virtuale',
     },
     client: 'Redsys',
-    year: '2024',
     summary: {
       es: 'La caché de un sistema nuevo que procesa los datos de miles de transacciones bancarias virtuales.',
       en: 'The cache of a new system that processes data from thousands of virtual bank transactions.',
@@ -107,7 +104,6 @@ export const projects: Project[] = [
       ro: 'Gateway-ul platformei în Go',
     },
     client: 'Atresmedia',
-    year: '2025–',
     summary: {
       es: 'Corrección de errores y mejoras en el login y la caché del gateway por el que pasan los microservicios.',
       en: 'Bug fixes and improvements to the login and caching of the gateway the microservices go through.',

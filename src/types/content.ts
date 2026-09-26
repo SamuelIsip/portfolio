@@ -23,7 +23,8 @@ export interface Site {
   languages: Localized<{ name: string; level: string }[]>;
   /** Companies I have shipped work for, shown in the hero. */
   clients: string[];
-  cv: { href: string; locale: Locale };
+  /** CV PDF path per language, under public/. */
+  cv: Localized;
   seo: { title: Localized; description: Localized };
 }
 
@@ -48,7 +49,6 @@ export interface Project {
   slug: string;
   title: Localized;
   client: string;
-  year: string;
   summary: Localized;
   /** Case-study beats: what was wrong, what I did. */
   problem: Localized;
