@@ -16,23 +16,17 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const [firstName, ...rest] = site.name.split(' ');
 const nameLines = [firstName, rest.join(' ')];
+const role = pick(site.role, locale);
+const phrases = [role, ...pick(site.roleRotation, locale)];
 ---
 
 <section aria-labelledby="hero-title" class="relative isolate overflow-hidden">
   <Landscape class="absolute inset-x-0 bottom-0 -z-10 h-64 w-full sm:h-80 lg:h-[46%]" />
 
   <!-- .page is content-box, so min-height subtracts the header (5rem) and this block's own padding (4rem + 3rem). -->
-  <div class="page relative flex flex-col pt-10 sm:pt-16 md:static md:pb-12 lg:min-h-[min(calc(100svh-12rem),46rem)] lg:pt-16 lg:pb-12">
+  <div class="page relative flex flex-col pt-10 pb-12 sm:pt-16 md:static lg:min-h-[min(calc(100svh-12rem),46rem)] lg:pt-16">
     <div class="md:max-w-[56%] lg:max-w-[58%]">
-      <p data-enter style="--i: 0" class="font-display flex items-start gap-3 text-sm text-muted">
-        <span class="mt-[0.7em] h-px w-6 shrink-0 bg-accent" aria-hidden="true"></span>
-        {pick(site.availability, locale)}
-      </p>
-
-      <h1
-        id="hero-title"
-        class="mt-6 text-display font-bold tracking-(--tracking-display)"
-      >
+      <h1 id="hero-title" class="text-display font-bold tracking-(--tracking-display)">
         {
           nameLines.map((line, i) => (
             <span class="name-line block overflow-hidden pb-[0.12em] -mb-[0.12em]">
@@ -42,8 +36,12 @@ const nameLines = [firstName, rest.join(' ')];
         }
       </h1>
 
-      <p data-enter style="--i: 2" class="font-display mt-5 text-xl font-medium text-ink lg:text-2xl">
-        {pick(site.role, locale)}
+      <!-- Screen readers get the plain role; the typing loop is visual only. -->
+      <p data-enter style="--i: 2" class="font-display mt-5 text-xl font-medium whitespace-nowrap text-ink lg:text-2xl">
+        <span class="sr-only">{role}</span>
+        <span aria-hidden="true" data-typewriter data-phrases={JSON.stringify(phrases)}>{role}</span><span
+          aria-hidden="true"
+          class="caret ml-1 inline-block h-[0.95em] w-0.5 translate-y-[0.12em] bg-accent"></span>
       </p>
 
       <p data-enter style="--i: 3" class="mt-5 max-w-(--container-prose) text-lg text-muted">
@@ -61,20 +59,23 @@ const nameLines = [firstName, rest.join(' ')];
 
     <div data-enter style="--i: 5" class="mt-12 md:max-w-[56%] lg:mt-auto lg:max-w-[55%] lg:pt-16">
       <p class="text-sm text-muted">{t('hero.clients')}</p>
-      <ul class="font-display mt-2 flex flex-wrap gap-x-6 gap-y-1 text-lg font-semibold sm:gap-x-8 sm:text-xl tracking-(--tracking-tight) text-ink">
+      <ul class="font-display mt-2 flex flex-wrap gap-x-6 gap-y-1 text-lg font-semibold tracking-(--tracking-tight) text-ink sm:gap-x-8 sm:text-xl">
         {site.clients.map((client) => <li>{client}</li>)}
       </ul>
     </div>
 
-    <!-- Phones: the portrait closes the hero, standing in the field. md+: pinned to the right edge. -->
+    <!--
+      Phones: faint, behind the text, so the photo is visible on first load without scrolling.
+      md+: full opacity, pinned to the right edge of the section.
+    -->
     <div
-      class="portrait relative -mr-(--spacing-gutter) mt-4 ml-auto w-[64%] max-w-80 md:absolute md:right-0 md:bottom-0 md:mr-0 md:h-[min(60%,34rem)] md:w-auto md:max-w-none lg:h-[min(74%,42rem)]"
+      class="portrait absolute top-6 right-0 -z-10 w-[88%] max-w-md opacity-25 md:top-auto md:bottom-0 md:z-auto md:h-[min(60%,34rem)] md:w-auto md:max-w-none md:opacity-100 lg:h-[min(74%,42rem)]"
     >
       <Image
         src={portrait}
         alt={t('hero.portraitAlt')}
         widths={[320, 480, 640, 880, 1100]}
-        sizes="(min-width: 1024px) 34vw, (min-width: 768px) 44vw, 64vw"
+        sizes="(min-width: 1024px) 34vw, (min-width: 768px) 44vw, 88vw"
         format="webp"
         loading="eager"
         fetchpriority="high"
@@ -83,6 +84,10 @@ const nameLines = [firstName, rest.join(' ')];
     </div>
   </div>
 </section>
+
+<script>
+  import '@/scripts/typewriter';
+</script>
 
 <style>
   @keyframes rise {
@@ -96,6 +101,11 @@ const nameLines = [firstName, rest.join(' ')];
       transform: translateY(105%);
     }
   }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 
   /* One orchestrated entrance: name lines slide up from their baseline, the rest follows. */
   .name-line > span {
@@ -107,9 +117,18 @@ const nameLines = [firstName, rest.join(' ')];
     animation: rise var(--duration-slow) var(--ease-out) both;
     animation-delay: calc(var(--i) * 90ms + 150ms);
   }
+  .caret {
+    animation: blink 1s steps(1) infinite;
+  }
   .portrait {
     animation: rise 1100ms var(--ease-out) 300ms both;
-    /* Melt the cut-off torso into the field instead of ending on a hard edge. */
-    mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
+    /* Phones: fade out early so the lower text sits on plain background. */
+    mask-image: linear-gradient(to bottom, #000 40%, transparent 88%);
+  }
+  @media (min-width: 48rem) {
+    .portrait {
+      /* Melt the cut-off torso into the field instead of ending on a hard edge. */
+      mask-image: linear-gradient(to bottom, #000 78%, transparent 99%);
+    }
   }
 </style>

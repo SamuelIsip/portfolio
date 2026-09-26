@@ -47,7 +47,6 @@ export const ui = {
   'about.years': { es: '{n} años', en: '{n} years', ro: '{n} ani' },
   'about.availability': { es: 'Disponibilidad', en: 'Availability', ro: 'Disponibilitate' },
   'about.languages': { es: 'Idiomas', en: 'Languages', ro: 'Limbi' },
-  'about.email': { es: 'Email', en: 'Email', ro: 'Email' },
 
   'skills.title': { es: 'Con qué trabajo', en: 'What I work with', ro: 'Cu ce lucrez' },
   'skills.intro': {

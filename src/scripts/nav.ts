@@ -66,3 +66,6 @@ if (sections.length > 0) {
   );
   sections.forEach((section) => observer.observe(section));
 }
+
+// Module scope: keeps top-level names from clashing with the other scripts.
+export {};
