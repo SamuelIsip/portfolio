@@ -1,0 +1,45 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { site } from '@/data/site';
+import { social } from '@/data/social';
+import type { Locale } from '@/i18n/config';
+import { pick, useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="page mt-(--spacing-section)">
+  <div class="flex flex-col gap-6 border-t border-line py-8 sm:flex-row sm:items-center sm:justify-between">
+    <div class="font-display leading-none">
+      <p class="text-base font-bold text-ink">{site.name}</p>
+      <p class="mt-1.5 text-xs text-muted">{pick(site.role, locale)}</p>
+    </div>
+
+    <p class="font-display text-xs text-muted">© {year} {site.fullName}</p>
+
+    <nav aria-label={t('footer.social')}>
+      <ul class="flex gap-2">
+        {
+          social.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-label={link.label}
+                class="flex size-10 items-center justify-center rounded-sm border border-line text-muted transition-colors duration-(--duration-fast) hover:border-line-strong hover:text-ink"
+                {...(link.href.startsWith('http') ? { rel: 'me noopener', target: '_blank' } : {})}
+              >
+                <Icon name={link.icon} class="size-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>

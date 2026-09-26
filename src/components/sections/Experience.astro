@@ -1,0 +1,71 @@
+---
+import Section from '@/components/ui/Section.astro';
+import { education, jobs } from '@/data/experience';
+import type { Locale } from '@/i18n/config';
+import { pick, useTranslations } from '@/i18n/ui';
+import { formatMonth } from '@/lib/format';
+import type { YearMonth } from '@/types/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const range = (start: YearMonth, end: YearMonth | null) => ({
+  start: formatMonth(start, locale),
+  end: end ? formatMonth(end, locale) : t('experience.present'),
+});
+---
+
+<Section id="experience" title={t('experience.title')}>
+  <ol>
+    {
+      jobs.map((job) => {
+        const dates = range(job.start, job.end);
+        return (
+          <li class="grid gap-3 border-t border-line py-8 first:border-t-0 first:pt-0 sm:grid-cols-[10rem_1fr] sm:gap-8">
+            <p class="font-display pt-1 text-sm text-muted tabular-nums">
+              <time datetime={job.start}>{dates.start}</time>
+              {" – "}
+              {job.end ? <time datetime={job.end}>{dates.end}</time> : <span>{dates.end}</span>}
+            </p>
+            <div>
+              <h3 class="text-xl font-bold">
+                {pick(job.role, locale)}<span class="font-medium text-muted">, {job.company}</span>
+              </h3>
+              {job.context && <p class="font-display mt-1 text-sm text-muted">{pick(job.context, locale)}</p>}
+              <ul class="mt-4 max-w-(--container-prose) space-y-3">
+                {pick(job.highlights, locale).map((item) => (
+                  <li class="relative pl-5 before:absolute before:top-[0.8em] before:left-0 before:h-px before:w-2.5 before:bg-line-strong">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+
+  <h3 class="font-display mt-14 text-sm font-semibold text-muted">{t('experience.education')}</h3>
+  <ul class="mt-4">
+    {
+      education.map((item) => {
+        const dates = range(item.start, item.end);
+        return (
+          <li class="grid gap-1 border-t border-line py-4 sm:grid-cols-[10rem_1fr] sm:gap-8">
+            <p class="font-display text-sm text-muted tabular-nums">
+              <time datetime={item.start}>{dates.start}</time>
+              {" – "}
+              <time datetime={item.end}>{dates.end}</time>
+            </p>
+            <p class="font-display font-medium text-ink">{pick(item.title, locale)}</p>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Section>

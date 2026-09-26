@@ -1,0 +1,24 @@
+---
+/* Inline list separated by slashes ("React / Spring Boot"), as in the reference. Typography comes from `class`. */
+interface Props {
+  items: string[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<ul class:list={['font-display flex flex-wrap', className]}>
+  {
+    items.map((item, i) => (
+      <li>
+        {item}
+        {i < items.length - 1 && (
+          <span class="mx-[0.45em] font-normal text-line-strong" aria-hidden="true">
+            /
+          </span>
+        )}
+      </li>
+    ))
+  }
+</ul>

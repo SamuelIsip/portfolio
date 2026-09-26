@@ -1,0 +1,31 @@
+---
+/*
+ * Shared section frame: a hairline, then the title in a narrow left column
+ * (sticky on desktop) and the content in the wide one — the page's asymmetric rhythm.
+ * Content that must span the full width (e.g. the project list) goes in the "full" slot.
+ */
+interface Props {
+  id: string;
+  title: string;
+  intro?: string;
+}
+
+const { id, title, intro } = Astro.props;
+---
+
+<section id={id} aria-labelledby={`${id}-title`} class="page pt-(--spacing-section)">
+  <div class="grid gap-x-8 gap-y-10 border-t border-line pt-8 lg:grid-cols-12 lg:pt-10">
+    <div class="lg:sticky lg:top-28 lg:col-span-4 lg:self-start">
+      <h2 id={`${id}-title`} class="text-3xl font-bold">{title}</h2>
+      {intro && <p class="mt-4 max-w-sm text-muted">{intro}</p>}
+    </div>
+    {
+      Astro.slots.has('default') && (
+        <div class="lg:col-span-8" data-reveal>
+          <slot />
+        </div>
+      )
+    }
+  </div>
+  <slot name="full" />
+</section>

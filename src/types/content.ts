@@ -13,6 +13,8 @@ export interface Site {
   location: string;
   timeZone: string;
   email: string;
+  /** As stated in the CV; kept explicit rather than computed from the first job. */
+  experienceYears: number;
   /** Hero sentence: what I build and for whom. */
   headline: Localized;
   /** About section, one string per paragraph. */
@@ -37,7 +39,8 @@ export interface SkillGroup {
 }
 
 export interface Metric {
-  value: string;
+  /** Plain string for numbers ("−70 %"), Localized when the value is a word. */
+  value: string | Localized;
   label: Localized;
 }
 

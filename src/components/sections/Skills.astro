@@ -1,0 +1,29 @@
+---
+import Section from '@/components/ui/Section.astro';
+import StackList from '@/components/ui/StackList.astro';
+import { skills } from '@/data/skills';
+import type { Locale } from '@/i18n/config';
+import { pick, useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<Section id="skills" title={t('skills.title')} intro={t('skills.intro')}>
+  <dl>
+    {
+      skills.map((group) => (
+        <div class="grid gap-2 border-t border-line py-5 first:border-t-0 first:pt-0 sm:grid-cols-[11rem_1fr] sm:gap-8">
+          <dt class="font-display pt-1 text-sm text-muted">{pick(group.title, locale)}</dt>
+          <dd>
+            <StackList items={group.items} class="text-xl font-semibold tracking-(--tracking-tight) text-ink" />
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</Section>

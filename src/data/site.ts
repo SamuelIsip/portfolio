@@ -11,6 +11,7 @@ export const site: Site = {
   location: 'Tarancón, Cuenca',
   timeZone: 'Europe/Madrid',
   email: 'samuel.isip26@gmail.com',
+  experienceYears: 6,
 
   headline: {
     es: 'Construyo y mantengo aplicaciones que la gente usa cada día en el trabajo: nóminas, pagos y herramientas internas. De la base de datos al despliegue.',

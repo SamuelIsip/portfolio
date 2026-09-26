@@ -35,7 +35,8 @@ npm run preview   # serve dist/
 | `<head>`, SEO, fonts, skip link | `src/layouts/BaseLayout.astro` |
 | Page composition (section order) | `src/components/HomePage.astro` |
 | One component per section | `src/components/sections/` |
-| Reusable UI pieces | `src/components/ui/` |
+| Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated list), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Landscape` |
+| Formatting helpers (dates, Localized-or-string) | `src/lib/format.ts` |
 | Client scripts (menu, reveal, form) | `src/scripts/` |
 | Images processed by astro:assets | `src/assets/` |
 | Static files served as-is (favicon, CV, OG image) | `public/` |
@@ -52,7 +53,9 @@ Routes: `/` (es), `/en/`, `/ro/`. `src/pages/index.astro` and `src/pages/[lang]/
   Samuel confirms the value.
 - Use token utilities (`bg-surface`, `text-muted`, `font-display`, `max-w-(--container-prose)`),
   never arbitrary hex/px values in components. Tailwind's default palette is disabled on purpose.
-- Section components: a `<section id="…" aria-labelledby="…">`, the id matching `src/data/navigation.ts`.
+- Section components wrap their content in `ui/Section.astro` (gives `id`, `aria-labelledby`, hairline and
+  the asymmetric grid); the id must match `src/data/navigation.ts`. Full-width content goes in `slot="full"`.
+- Scroll reveal: add `data-reveal` to at most one block per section (or per project); never to every element.
 - Components stay small; extract to `src/components/ui/` when markup repeats.
 - Comments explain *why*, not *what*.
 - Iterating: when asked to change one thing, edit only the relevant component or data file.

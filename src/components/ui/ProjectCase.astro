@@ -1,0 +1,102 @@
+---
+/*
+ * One project as a short case study. `featured` gets the raised, two-column
+ * treatment; the rest are hairline-separated rows, so the list doesn't turn
+ * into a grid of identical cards.
+ */
+import StackList from '@/components/ui/StackList.astro';
+import type { Locale } from '@/i18n/config';
+import { pick, useTranslations } from '@/i18n/ui';
+import { text } from '@/lib/format';
+import type { Project } from '@/types/content';
+
+interface Props {
+  project: Project;
+  index: number;
+  locale: Locale;
+  featured?: boolean;
+}
+
+const { project, index, locale, featured = false } = Astro.props;
+const t = useTranslations(locale);
+const number = String(index + 1).padStart(2, '0');
+const headingId = `project-${project.slug}`;
+---
+
+<li
+  aria-labelledby={headingId}
+  data-reveal
+  class:list={[
+    'grid gap-x-8 gap-y-6 lg:grid-cols-12',
+    featured ? 'rounded-md bg-surface p-6 sm:p-8 lg:p-10' : 'border-t border-line py-10',
+  ]}
+>
+  <div class:list={[featured ? 'lg:col-span-7' : 'lg:col-span-5']}>
+    <p class="font-display flex items-baseline gap-3 text-sm">
+      <span class="text-muted tabular-nums" aria-hidden="true">{number}</span>
+      <span class="font-medium text-ink">{project.client}</span>
+      <span class="text-muted">{project.year}</span>
+    </p>
+    <h3 id={headingId} class:list={['mt-3 font-bold', featured ? 'text-2xl' : 'text-xl']}>
+      {pick(project.title, locale)}
+    </h3>
+    <p class:list={['mt-3 text-muted', featured && 'text-lg']}>{pick(project.summary, locale)}</p>
+
+    {
+      featured && (
+        <dl class="mt-8 grid gap-6 sm:grid-cols-2">
+          <div>
+            <dt class="font-display text-sm font-semibold text-ink">{t('projects.problem')}</dt>
+            <dd class="mt-2 text-muted">{pick(project.problem, locale)}</dd>
+          </div>
+          <div>
+            <dt class="font-display text-sm font-semibold text-ink">{t('projects.work')}</dt>
+            <dd class="mt-2 text-muted">{pick(project.work, locale)}</dd>
+          </div>
+        </dl>
+      )
+    }
+  </div>
+
+  {
+    !featured && (
+      <dl class="space-y-4 lg:col-span-4">
+        <div>
+          <dt class="font-display text-sm font-semibold text-ink">{t('projects.problem')}</dt>
+          <dd class="mt-1 text-base text-muted">{pick(project.problem, locale)}</dd>
+        </div>
+        <div>
+          <dt class="font-display text-sm font-semibold text-ink">{t('projects.work')}</dt>
+          <dd class="mt-1 text-base text-muted">{pick(project.work, locale)}</dd>
+        </div>
+      </dl>
+    )
+  }
+
+  <div
+    class:list={[
+      'flex flex-col gap-6',
+      featured ? 'lg:col-span-5 lg:border-l lg:border-line lg:pl-10' : 'lg:col-span-3',
+    ]}
+  >
+    {
+      project.metrics && (
+        <dl class="grid grid-cols-2 gap-5 lg:grid-cols-1">
+          <dt class="sr-only">{t('projects.results')}</dt>
+          {project.metrics.map((metric) => (
+            <dd>
+              <span class:list={['font-display block font-bold tracking-(--tracking-tight) text-ink', featured ? 'text-3xl' : 'text-2xl']}>
+                {text(metric.value, locale)}
+              </span>
+              <span class="font-display mt-1 block text-sm text-muted">{pick(metric.label, locale)}</span>
+            </dd>
+          ))}
+        </dl>
+      )
+    }
+    <div class="mt-auto">
+      <p class="sr-only">{t('projects.stack')}</p>
+      <StackList items={project.stack} class="text-sm font-medium text-accent" />
+    </div>
+  </div>
+</li>

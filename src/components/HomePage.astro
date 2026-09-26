@@ -4,8 +4,13 @@
  * so sections are added here once and appear in all languages.
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import About from '@/components/sections/About.astro';
+import Experience from '@/components/sections/Experience.astro';
+import Footer from '@/components/sections/Footer.astro';
 import Header from '@/components/sections/Header.astro';
 import Hero from '@/components/sections/Hero.astro';
+import Projects from '@/components/sections/Projects.astro';
+import Skills from '@/components/sections/Skills.astro';
 import type { Locale } from '@/i18n/config';
 import { pick } from '@/i18n/ui';
 import { site } from '@/data/site';
@@ -25,5 +30,14 @@ const { locale } = Astro.props;
   <Header locale={locale} />
   <main id="main">
     <Hero locale={locale} />
+    <About locale={locale} />
+    <Skills locale={locale} />
+    <Projects locale={locale} />
+    <Experience locale={locale} />
   </main>
+  <Footer locale={locale} />
 </BaseLayout>
+
+<script>
+  import '@/scripts/reveal';
+</script>

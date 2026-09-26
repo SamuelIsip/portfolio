@@ -32,8 +32,14 @@ export const projects: Project[] = [
       ro: 'Am proiectat backend-ul cu Spring Boot și Spring Cloud pe PostgreSQL și frontend-ul în React. Am securizat API-ul cu Microsoft Entra ID, OAuth2/JWT și Spring Security și l-am lansat pe GKE cu Docker și Jenkins.',
     },
     metrics: [
-      { value: '100s', label: { es: 'usuarios diarios', en: 'daily users', ro: 'utilizatori zilnici' } },
-      { value: '0 → prod', label: { es: 'de cero a producción', en: 'from zero to production', ro: 'de la zero la producție' } },
+      {
+        value: { es: 'Cientos', en: 'Hundreds', ro: 'Sute' },
+        label: { es: 'de usuarios cada día', en: 'of users every day', ro: 'de utilizatori în fiecare zi' },
+      },
+      {
+        value: { es: 'De cero', en: 'From zero', ro: 'De la zero' },
+        label: { es: 'a producción en GKE', en: 'to production on GKE', ro: 'la producție pe GKE' },
+      },
     ],
     stack: ['Spring Boot', 'Spring Cloud', 'PostgreSQL', 'React', 'Entra ID', 'GKE'],
   },

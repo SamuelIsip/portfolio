@@ -1,0 +1,27 @@
+---
+import ProjectCase from '@/components/ui/ProjectCase.astro';
+import Section from '@/components/ui/Section.astro';
+import { projects } from '@/data/projects';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const featuredIndex = projects.findIndex((p) => p.featured);
+---
+
+<Section id="projects" title={t('projects.title')}>
+  <p class="max-w-(--container-prose) text-lg text-muted">{t('projects.intro')}</p>
+
+  <ol slot="full" class="mt-14">
+    {
+      projects.map((project, index) => (
+        <ProjectCase project={project} index={index} locale={locale} featured={index === featuredIndex} />
+      ))
+    }
+  </ol>
+</Section>

@@ -47,6 +47,39 @@ export const ui = {
     en: 'Samuel Isip with glasses pushed up, wearing a white polo shirt',
     ro: 'Samuel Isip, cu ochelarii ridicați pe cap, purtând un tricou polo alb',
   },
+
+  'about.title': { es: 'Sobre mí', en: 'About', ro: 'Despre mine' },
+  'about.location': { es: 'Vivo en', en: 'Based in', ro: 'Locuiesc în' },
+  'about.experience': { es: 'Experiencia', en: 'Experience', ro: 'Experiență' },
+  'about.years': { es: '{n} años', en: '{n} years', ro: '{n} ani' },
+  'about.availability': { es: 'Disponibilidad', en: 'Availability', ro: 'Disponibilitate' },
+  'about.languages': { es: 'Idiomas', en: 'Languages', ro: 'Limbi' },
+  'about.email': { es: 'Email', en: 'Email', ro: 'Email' },
+
+  'skills.title': { es: 'Con qué trabajo', en: 'What I work with', ro: 'Cu ce lucrez' },
+  'skills.intro': {
+    es: 'Lo que uso en producción, no todo lo que he probado alguna vez.',
+    en: 'What I use in production, not everything I have ever tried.',
+    ro: 'Ce folosesc în producție, nu tot ce am încercat vreodată.',
+  },
+
+  'projects.title': { es: 'Proyectos', en: 'Selected work', ro: 'Proiecte' },
+  'projects.intro': {
+    es: 'Trabajo para clientes con acuerdos de confidencialidad, así que no hay capturas: cuento qué había que resolver, qué hice y qué cambió.',
+    en: 'My client work is under NDA, so there are no screenshots: instead, what needed solving, what I did and what changed.',
+    ro: 'Lucrez pentru clienți cu acorduri de confidențialitate, așa că nu există capturi: povestesc ce trebuia rezolvat, ce am făcut și ce s-a schimbat.',
+  },
+  'projects.problem': { es: 'El problema', en: 'The problem', ro: 'Problema' },
+  'projects.work': { es: 'Qué hice', en: 'What I did', ro: 'Ce am făcut' },
+  'projects.results': { es: 'Resultados', en: 'Results', ro: 'Rezultate' },
+  'projects.stack': { es: 'Tecnologías', en: 'Technologies', ro: 'Tehnologii' },
+
+  'experience.title': { es: 'Experiencia', en: 'Experience', ro: 'Experiență' },
+  'experience.present': { es: 'actualidad', en: 'present', ro: 'prezent' },
+  'experience.education': { es: 'Formación', en: 'Education', ro: 'Educație' },
+
+  'footer.social': { es: 'Otros perfiles', en: 'Elsewhere', ro: 'Alte profiluri' },
+  'footer.top': { es: 'Volver arriba', en: 'Back to top', ro: 'Înapoi sus' },
 } satisfies Record<string, Localized>;
 
 export type UiKey = keyof typeof ui;
