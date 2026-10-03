@@ -20,7 +20,11 @@ const t = useTranslations(locale);
         <div class="grid gap-2 border-t border-line py-5 first:border-t-0 first:pt-0 sm:grid-cols-[11rem_1fr] sm:gap-8">
           <dt class="font-display pt-1 text-sm text-muted">{pick(group.title, locale)}</dt>
           <dd>
-            <StackList items={group.items} class="text-xl font-semibold tracking-(--tracking-tight) text-ink" />
+            <StackList
+              items={group.items}
+              layout="grid"
+              class="text-base font-semibold tracking-(--tracking-tight) text-ink sm:text-lg"
+            />
           </dd>
         </div>
       ))

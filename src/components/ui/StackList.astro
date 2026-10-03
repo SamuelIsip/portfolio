@@ -1,6 +1,9 @@
 ---
 /*
- * Inline list separated by slashes ("React / Spring Boot"), as in the reference.
+ * List of tools, in one of two layouts:
+ * - `inline`: separated by slashes ("React / Spring Boot"), as in the reference.
+ *   Used where the stack is a one-line footnote (projects).
+ * - `grid`: aligned columns, two per row on phones, for lists meant to be scanned.
  * Items may carry a brand icon, drawn small and muted so it doesn't compete with
  * the single accent colour. Typography comes from `class`.
  */
@@ -9,20 +12,28 @@ import type { StackItem } from '@/types/content';
 
 interface Props {
   items: (string | StackItem)[];
+  layout?: 'inline' | 'grid';
   class?: string;
 }
 
-const { items, class: className } = Astro.props;
+const { items, layout = 'inline', class: className } = Astro.props;
 const entries = items.map((item) => {
   const { name, icon } = typeof item === 'string' ? { name: item, icon: undefined } : item;
   return { name, path: icon ? brandIcon(icon).path : undefined };
 });
+const isGrid = layout === 'grid';
 ---
 
-<ul class:list={['font-display flex flex-wrap', className]}>
+<ul
+  class:list={[
+    'font-display',
+    isGrid ? 'grid grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-3' : 'flex flex-wrap',
+    className,
+  ]}
+>
   {
     entries.map(({ name, path }, i) => (
-      <li class="inline-flex items-center">
+      <li class="inline-flex min-w-0 items-center">
         {path && (
           <svg
             viewBox="0 0 24 24"
@@ -34,7 +45,7 @@ const entries = items.map((item) => {
           </svg>
         )}
         {name}
-        {i < entries.length - 1 && (
+        {!isGrid && i < entries.length - 1 && (
           <span class="mx-[0.45em] font-normal text-line-strong" aria-hidden="true">
             /
           </span>
