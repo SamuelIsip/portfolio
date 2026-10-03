@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import portrait from '@/assets/portrait.png';
 import Button from '@/components/ui/Button.astro';
 import Icon from '@/components/ui/Icon.astro';
-import Landscape from '@/components/ui/Landscape.astro';
+import Topography from '@/components/ui/Topography.astro';
 import { site } from '@/data/site';
 import type { Locale } from '@/i18n/config';
 import { pick, useTranslations } from '@/i18n/ui';
@@ -21,7 +21,7 @@ const phrases = [role, ...pick(site.roleRotation, locale)];
 ---
 
 <section aria-labelledby="hero-title" class="relative isolate overflow-hidden">
-  <Landscape class="absolute inset-x-0 bottom-0 -z-10 h-64 w-full sm:h-80 lg:h-[46%]" />
+  <Topography fade="both" class="absolute inset-0 -z-10 size-full" />
 
   <!-- .page is content-box, so min-height subtracts the header (5rem) and this block's own padding (4rem + 3rem). -->
   <div class="page relative flex flex-col pt-10 pb-12 sm:pt-16 md:static lg:min-h-[min(calc(100svh-12rem),46rem)] lg:pt-16">

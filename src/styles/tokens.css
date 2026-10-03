@@ -9,24 +9,21 @@
   --color-*: initial;
 
   /* Palette: night navy from the reference, one blue accent. */
-  --color-night: #0a1120;        /* page background */
-  --color-surface: #101a2c;      /* raised blocks (fact sheet, form) */
-  --color-line: #1f2b40;         /* hairlines and borders */
-  --color-line-strong: #33425c;  /* decorative separators, hover borders */
-  --color-field: #5b6a84;        /* form control borders — ≥3:1 on surface (WCAG 1.4.11) */
+  --color-night: #121d31;        /* page background */
+  --color-surface: #1a2740;      /* raised blocks (fact sheet, form) */
+  --color-line: #27354f;         /* hairlines and borders */
+  --color-line-strong: #3a4a68;  /* decorative separators, hover borders */
+  --color-field: #66758f;        /* form control borders — ≥3:1 on surface (WCAG 1.4.11) */
   --color-ink: #f2f5f9;          /* primary text */
-  --color-muted: #93a0b4;        /* secondary text — 6.6:1 on surface */
+  --color-muted: #9aa7bb;        /* secondary text — 6.1:1 on surface */
   /* Two tones of the same accent: plain #2F80ED fails AA with white text (3.9:1). */
-  --color-accent: #3a86f0;       /* accent as text on dark — ≥4.8:1 */
+  --color-accent: #4a90f2;       /* accent as text on dark — ≥4.6:1 */
   --color-accent-strong: #1d6fe0;/* accent as fill behind white text — 4.8:1 */
   --color-accent-deep: #185cc0;  /* hover/pressed state of accent-strong fills */
 
-  /* Hero landscape (La Mancha at night): layers step from horizon glow to foreground. */
-  --color-sky-low: #111c30;      /* faint lift of the sky at the horizon */
-  --color-land-far: #16233a;     /* Sierra de Altomira */
-  --color-land-mid: #0f192b;     /* ridge with windmills */
-  --color-land-near: #0b1322;    /* ploughed field */
-  --color-mill: #2a3a55;         /* whitewashed mill towers catching moonlight */
+  /* Contour map (hero, footer band, 404): faint lines, every fourth one stronger. */
+  --color-contour: #1f2c45;
+  --color-contour-index: #2e3d5c;
   --color-danger: #f07a6a;
   --color-success: #5cc98f;
   --color-white: #ffffff;

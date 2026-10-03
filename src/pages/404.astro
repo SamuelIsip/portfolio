@@ -3,7 +3,7 @@
  * One 404 for every language: the URL can't tell us which one the visitor
  * expected, so the message is shown in all three.
  */
-import Landscape from '@/components/ui/Landscape.astro';
+import Topography from '@/components/ui/Topography.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/data/site';
 import { localePath, locales } from '@/i18n/config';
@@ -37,6 +37,6 @@ const copy = {
         }
       </ul>
     </div></div>
-    <Landscape class="mt-16 block h-48 w-full sm:h-64" />
+    <Topography class="mt-16 block h-48 w-full sm:h-64" />
   </main>
 </BaseLayout>
