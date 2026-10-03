@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import portrait from '@/assets/portrait.png';
 import Button from '@/components/ui/Button.astro';
 import Icon from '@/components/ui/Icon.astro';
-import Landscape from '@/components/ui/Landscape.astro';
+import Topography from '@/components/ui/Topography.astro';
 import { site } from '@/data/site';
 import type { Locale } from '@/i18n/config';
 import { pick, useTranslations } from '@/i18n/ui';
@@ -21,7 +21,7 @@ const phrases = [role, ...pick(site.roleRotation, locale)];
 ---
 
 <section aria-labelledby="hero-title" class="relative isolate overflow-hidden">
-  <Landscape class="absolute inset-x-0 bottom-0 -z-10 h-64 w-full sm:h-80 lg:h-[46%]" />
+  <Topography fade="both" class="absolute inset-0 -z-10 size-full" />
 
   <!-- .page is content-box, so min-height subtracts the header (5rem) and this block's own padding (4rem + 3rem). -->
   <div class="page relative flex flex-col pt-10 pb-12 sm:pt-16 md:static lg:min-h-[min(calc(100svh-12rem),46rem)] lg:pt-16">
@@ -68,8 +68,25 @@ const phrases = [role, ...pick(site.roleRotation, locale)];
       Phones: faint, behind the text, so the photo is visible on first load without scrolling.
       md+: full opacity, pinned to the right edge of the section.
     -->
+    <!--
+      Phones dim the photo with this filter rather than `opacity`: it lays the faded photo over
+      a solid night silhouette, so the contour lines stay behind the photo instead of showing through.
+    -->
+    <svg class="absolute size-0" aria-hidden="true" focusable="false">
+      <filter id="portrait-dim" color-interpolation-filters="sRGB">
+        <feFlood style="flood-color: var(--color-night)" />
+        <feComposite in2="SourceAlpha" operator="in" result="silhouette" />
+        <feComponentTransfer in="SourceGraphic" result="faded">
+          <feFuncA type="linear" slope="0.25" />
+        </feComponentTransfer>
+        <feMerge>
+          <feMergeNode in="silhouette" />
+          <feMergeNode in="faded" />
+        </feMerge>
+      </filter>
+    </svg>
     <div
-      class="portrait absolute top-6 right-0 -z-10 w-[88%] max-w-md opacity-25 md:top-auto md:bottom-0 md:z-auto md:h-[min(60%,34rem)] md:w-auto md:max-w-none md:opacity-100 lg:h-[min(74%,42rem)]"
+      class="portrait absolute top-6 right-0 -z-10 w-[88%] max-w-md md:top-auto md:bottom-0 md:z-auto md:h-[min(60%,34rem)] md:w-auto md:max-w-none lg:h-[min(74%,42rem)]"
     >
       <Image
         src={portrait}
@@ -79,7 +96,7 @@ const phrases = [role, ...pick(site.roleRotation, locale)];
         format="webp"
         loading="eager"
         fetchpriority="high"
-        class="block h-auto w-full md:h-full md:w-auto"
+        class="portrait-photo block h-auto w-full md:h-full md:w-auto"
       />
     </div>
   </div>
@@ -124,6 +141,11 @@ const phrases = [role, ...pick(site.roleRotation, locale)];
     animation: rise 1100ms var(--ease-out) 300ms both;
     /* Phones: fade out early so the lower text sits on plain background. */
     mask-image: linear-gradient(to bottom, #000 40%, transparent 88%);
+  }
+  @media (max-width: 47.99rem) {
+    .portrait-photo {
+      filter: url(#portrait-dim);
+    }
   }
   @media (min-width: 48rem) {
     .portrait {

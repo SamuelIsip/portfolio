@@ -56,7 +56,7 @@ documentation here, not there.
 | `<head>`, SEO, fonts, skip link | `src/layouts/BaseLayout.astro` |
 | Page composition (section order) | `src/components/HomePage.astro` |
 | One component per section | `src/components/sections/` |
-| Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated or grid list, optional muted logos), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Landscape` |
+| Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated or grid list, optional muted logos), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Topography` |
 | Formatting helpers (dates, Localized-or-string) | `src/lib/format.ts` |
 | Brand logo lookup by slug (fails the build on unknown slugs) | `src/lib/brand-icons.ts` |
 | Contact form rules (limits, validation, honeypot) | `src/lib/contact.ts` + `src/scripts/contact-form.ts` |
@@ -88,7 +88,7 @@ Routes: `/` (es), `/en/`, `/ro/`. `src/pages/index.astro` and `src/pages/[lang]/
 
 ## Design system
 
-- **Palette**: night navy + one blue accent (see `tokens.css`). The accent has two tones:
+- **Palette**: night navy (lifted from near-black on purpose) + one blue accent (see `tokens.css`). The accent has two tones:
   `accent` for text/links on dark, `accent-strong` for fills behind white text (plain #2F80ED fails AA).
   Accent is only used for: active nav link, primary CTA, project stack, focus ring, the monogram
   underline and the typewriter caret.
@@ -105,12 +105,16 @@ Routes: `/` (es), `/en/`, `/ro/`. `src/pages/index.astro` and `src/pages/[lang]/
 - **Hero**: name → role (typewriter) → headline → CTA + CV download → clients. No availability line here
   (it lives in the About fact sheet). The role line types/deletes `role` + `roleRotation`; the animated
   span is `aria-hidden` with the plain role in `sr-only` text, and reduced motion keeps it static.
-  `src/components/ui/Landscape.astro` draws La Mancha at night (Sierra de Altomira, windmills, ploughed
-  field) in SVG using the `land-*`/`mill` tokens; it is reused as a band above the footer and on the 404.
+  `src/components/ui/Topography.astro` draws a contour map of an imagined Sierra de Altomira (hairlines in
+  the `contour*` tokens, every fourth line stronger), computed at build time by `src/lib/contours.ts`
+  (marching squares, no dependency). It covers the hero fading in and out (`fade="both"`), and is reused
+  as a band above the footer and on the 404. It replaced a windmill landscape Samuel found too literal.
   `src/assets/portrait.png` is the cut-out of `reference/portada/` — background removed, graded cooler,
   and **mirrored** so the cropped shoulder sits against the right edge of the viewport.
   - Phones (< md): portrait **behind the text** at 25 % opacity, fading out downwards, so it is visible
-    on first load without scrolling (Samuel's choice among 3 mocked options).
+    on first load without scrolling (Samuel's choice among 3 mocked options). The dimming is an SVG
+    filter (`#portrait-dim`) over a solid night silhouette, not `opacity`, so the contour lines stay
+    behind the photo instead of showing through the face.
   - md+: full opacity, anchored bottom-right of the section with the bottom fade mask.
 - **Stack list**: each tool shows its logo small (0.72em) and in `muted` grey before the name — never in
   brand colours (keeps the single-accent palette; chosen over brand-colour and watermark variants).

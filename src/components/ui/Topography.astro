@@ -1,0 +1,38 @@
+---
+/*
+ * Contour map of an imagined Sierra de Altomira, the hills on the horizon from
+ * Tarancón. Decorative only: hairlines in the contour tokens, fading in from the top
+ * so text above it sits on plain background. `fade="both"` also fades the bottom, for
+ * blocks with no hairline underneath. Size and position come from `class`.
+ */
+import { contours, FRAME } from '@/lib/contours';
+
+interface Props {
+  fade?: 'top' | 'both';
+  class?: string;
+}
+const { fade = 'top', class: className } = Astro.props;
+const { regular, index } = contours();
+---
+
+<svg
+  class:list={['topography', fade === 'both' && 'fade-both', className]}
+  viewBox={`0 0 ${FRAME.width} ${FRAME.height}`}
+  preserveAspectRatio="xMidYMax slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <g fill="none" stroke-width="1" vector-effect="non-scaling-stroke">
+    <path d={regular} stroke="var(--color-contour)" vector-effect="non-scaling-stroke" />
+    <path d={index} stroke="var(--color-contour-index)" vector-effect="non-scaling-stroke" />
+  </g>
+</svg>
+
+<style>
+  .topography {
+    mask-image: linear-gradient(to bottom, transparent, #000 65%);
+  }
+  .fade-both {
+    mask-image: linear-gradient(to bottom, transparent, #000 40%, #000 70%, transparent);
+  }
+</style>
