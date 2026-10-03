@@ -32,7 +32,7 @@ npm run preview   # serve dist/
 
 - Cloudflare Pages, connected to `github.com/SamuelIsip/portfolio`: build `npm run build`, output `dist`.
   Pushing to `main` deploys. No environment variables needed.
-- Domain: `samuelisipcv.com`. If it changes, update `site` in `astro.config.mjs` and the sitemap URL in
+- Domain: `samuelisip.es`. If it changes, update `site` in `astro.config.mjs` and the sitemap URL in
   `public/robots.txt`.
 - `PUBLIC_CONTACT_ENDPOINT` only needs setting (`.env` locally, Cloudflare build variable) to use a
   different Formspree form.

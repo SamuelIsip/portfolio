@@ -6,4 +6,4 @@ en los que he participado para empresas como Atresmedia, Redsys y Aena, y mi tra
 Está disponible en español, inglés y rumano, e incluye mi CV descargable en cada idioma y un formulario
 para contactar conmigo.
 
-[samuelisipcv.com](https://samuelisipcv.com)
+[samuelisip.es](https://samuelisip.es)

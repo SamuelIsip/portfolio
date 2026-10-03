@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://samuelisipcv.com',
+  site: 'https://samuelisip.es',
   // A single page with ~15 kB of CSS: inlining it saves a render-blocking request.
   build: { inlineStylesheets: 'always' },
   i18n: {
