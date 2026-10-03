@@ -32,7 +32,7 @@ npm run preview   # serve dist/
 
 - Cloudflare Pages, connected to `github.com/SamuelIsip/portfolio`: build `npm run build`, output `dist`.
   Pushing to `main` deploys. No environment variables needed.
-- Domain: `samuelisipcv.com`. If it changes, update `site` in `astro.config.mjs` and the sitemap URL in
+- Domain: `samuelisip.es`. If it changes, update `site` in `astro.config.mjs` and the sitemap URL in
   `public/robots.txt`.
 - `PUBLIC_CONTACT_ENDPOINT` only needs setting (`.env` locally, Cloudflare build variable) to use a
   different Formspree form.
@@ -56,7 +56,7 @@ documentation here, not there.
 | `<head>`, SEO, fonts, skip link | `src/layouts/BaseLayout.astro` |
 | Page composition (section order) | `src/components/HomePage.astro` |
 | One component per section | `src/components/sections/` |
-| Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated list, optional muted logos), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Landscape` |
+| Reusable UI pieces | `src/components/ui/` — `Section` (hairline + sticky title column + content), `StackList` (slash-separated or grid list, optional muted logos), `ProjectCase`, `Button`, `Icon`, `LanguageSwitcher`, `Landscape` |
 | Formatting helpers (dates, Localized-or-string) | `src/lib/format.ts` |
 | Brand logo lookup by slug (fails the build on unknown slugs) | `src/lib/brand-icons.ts` |
 | Contact form rules (limits, validation, honeypot) | `src/lib/contact.ts` + `src/scripts/contact-form.ts` |
