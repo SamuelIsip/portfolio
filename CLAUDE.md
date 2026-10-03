@@ -112,7 +112,9 @@ Routes: `/` (es), `/en/`, `/ro/`. `src/pages/index.astro` and `src/pages/[lang]/
   `src/assets/portrait.png` is the cut-out of `reference/portada/` — background removed, graded cooler,
   and **mirrored** so the cropped shoulder sits against the right edge of the viewport.
   - Phones (< md): portrait **behind the text** at 25 % opacity, fading out downwards, so it is visible
-    on first load without scrolling (Samuel's choice among 3 mocked options).
+    on first load without scrolling (Samuel's choice among 3 mocked options). The dimming is an SVG
+    filter (`#portrait-dim`) over a solid night silhouette, not `opacity`, so the contour lines stay
+    behind the photo instead of showing through the face.
   - md+: full opacity, anchored bottom-right of the section with the bottom fade mask.
 - **Stack list**: each tool shows its logo small (0.72em) and in `muted` grey before the name — never in
   brand colours (keeps the single-accent palette; chosen over brand-colour and watermark variants).
